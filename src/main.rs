@@ -125,9 +125,9 @@ fn main() -> std::io::Result<()> {
 
     for tri in triangles {
 
-        let ab_thru_Y = tri.vertex_a.y * tri.vertex_b.y < 0;
-        let ac_thru_Y = tri.vertex_a.y * tri.vertex_b.y < 0;
-        let bc_thru_Y = tri.vertex_b.y * tri.vertex_c.y < 0;
+        let ab_thru_Y = tri.vertex_a.x * tri.vertex_b.x < 0;
+        let ac_thru_Y = tri.vertex_a.x * tri.vertex_c.x < 0;
+        let bc_thru_Y = tri.vertex_b.x * tri.vertex_c.x < 0;
 
         // Skip if 0 lines through Y
         if !(ab_thru_Y || ac_thru_Y || bc_thru_Y) {
@@ -157,19 +157,10 @@ fn main() -> std::io::Result<()> {
         let c_kay = Fraction::from(common.y) - (Fraction::from(kay.y - common.y) / Fraction::from(kay.x - common.x) * Fraction::from(common.x));
 
         let og = (c_jay * c_kay);
-        println!("{}", tri);
-        println!("    The common vertex is {}", common_char);
-        println!("    The jay intercept is: {}", c_jay);
-        println!("    The kay intercept is: {}", c_kay);
         if og < fract_zero {
             ct += 1;
-            println!("    jay * kay = {}", og);
             continue;
         }
-
-        println!("    jay * kay = +{}", og);
-        println!("    The origin is not inside");
-
     }
 
     println!("{} triangles contain the origin", ct);
@@ -177,4 +168,4 @@ fn main() -> std::io::Result<()> {
     Ok(())
 }
 
-//TODO (-119, 359), (668, -609), (-358, -494) is an insane triangle for insane people
+
